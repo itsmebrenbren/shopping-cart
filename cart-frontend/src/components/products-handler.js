@@ -39,6 +39,7 @@ export default function ProductList() {
     refetchOnWindowFocus: true,
   });
 
+  // Updates database with changes in a products stock
   const updateProductStock = async (id, newStock) => {
     try {
       await axios.put(`http://localhost:1337/api/products/${id}`, {
@@ -51,6 +52,7 @@ export default function ProductList() {
     }
   };
 
+  // Adding items to cart
   const addToCart = async (productToAdd) => {
     const newCart = [...cartState];
     const itemInCart = newCart.find(item => item.id === productToAdd.id);
@@ -59,11 +61,11 @@ export default function ProductList() {
     } else {
       newCart.push({ ...productToAdd, quantity: 1 });
     }
-    setCartState(newCart);
+    setCartState(newCart); // Update cartState with stock/item changes
     console.log(cartState);
   
     const newStock = productToAdd.instock - 1;
-    await updateProductStock(productToAdd.id, newStock); // Update database
+    await updateProductStock(productToAdd.id, newStock); // Update database once an item is added to the cart
 
     const updatedProducts = productState.map(product => 
       product.id === productToAdd.id ? { ...product, instock: newStock } : product
@@ -71,6 +73,7 @@ export default function ProductList() {
     setProductState(updatedProducts); // Update product list with new stock number
   };
 
+  // Here is my restock code
   const restockProduct = async (productId) => {
     const newStock = productState.find(product => product.id === productId).instock + 10;
     await updateProductStock(productId, newStock); // Update database on restock

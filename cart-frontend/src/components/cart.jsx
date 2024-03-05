@@ -33,7 +33,7 @@ export default function Cart() {
   return (
     <Card>
       <Card.Body>
-        <Card.Title>Cart</Card.Title>
+        <Card.Title className="title-text">Cart</Card.Title>
         <Table striped bordered hover>
           <thead>
             <tr>

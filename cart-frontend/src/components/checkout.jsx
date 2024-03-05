@@ -23,7 +23,7 @@ export default function Checkout() {
   return (
     <Card>
       <Card.Body>
-        <Card.Title>Checkout</Card.Title>
+        <Card.Title className="title-text">Checkout</Card.Title>
         <Table striped bordered hover>
           <thead>
             <tr>
@@ -50,9 +50,9 @@ export default function Checkout() {
 
         <Modal show={showModal} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Congrats!</Modal.Title>
+            <Modal.Title className="title-text">Congrats!</Modal.Title>
           </Modal.Header>
-          <Modal.Body>Congrats! You have successfully checked out!</Modal.Body>
+          <Modal.Body>You have successfully checked out!</Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>
               Thank you

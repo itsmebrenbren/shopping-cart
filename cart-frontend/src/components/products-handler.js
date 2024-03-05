@@ -3,9 +3,14 @@ import axios from 'axios';
 import { useAtom } from "jotai";
 import { productAtom } from "../atoms/productAtom";
 import { cartAtom } from "../atoms/cartAtom";
-import { Accordion, Card, Button } from 'react-bootstrap';
+import { Accordion, Card, Button, Image } from 'react-bootstrap';
 
-
+const imageMap = {
+  "Apples": "/images/apple.png",
+  "Oranges": "/images/orange.png",
+  "Beans": "/images/beans.png",
+  "Cabbage": "/images/cabbage.png"
+};
 
 export default function ProductList() {
   const [ productState, setProductState ] = useAtom(productAtom);
@@ -95,11 +100,13 @@ export default function ProductList() {
     <>
       <Card> 
         <Card.Body>
-          <Card.Title>Products {renderLoadingOrError()}</Card.Title>
+          <Card.Title className="title-text">Products {renderLoadingOrError()}</Card.Title>
           <Accordion defaultActiveKey="null">
             {productState.map((product, index) => (
               <Accordion.Item eventKey={String(index)} key={index}>
-                <Accordion.Header>{product.name} - ${product.cost}</Accordion.Header>
+                <Accordion.Header>
+                  <Image src={imageMap[product.name]} roundedCircle width="30" height="30" className="me-2"/>
+                  {product.name} : ${product.cost}</Accordion.Header>
                 <Accordion.Body>
                   <p>Country: {product.country}</p>
                   <p>In stock: {product.instock}</p>

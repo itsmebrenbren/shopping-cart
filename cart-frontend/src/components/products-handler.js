@@ -2,9 +2,9 @@ import { useQuery } from "@tanstack/react-query";
 import axios from 'axios';
 import { useAtom } from "jotai";
 import { allProductsAtom } from "../atoms/allProductsAtom";
+import { Accordion } from 'react-bootstrap';
 
-
-export default function ProductsHandler () {
+export default function ProductList () {
   const [allProductState, setAllProductState] = useAtom(allProductsAtom);
 
   const fetchData = async () => {
@@ -43,20 +43,18 @@ export default function ProductsHandler () {
     }
   };
 
+
   return (
-    <>
-      {renderLoadingOrError()}
-      <div>
-        {allProductState.map((product, index) => (
-          <div key={index}>
-            <p>Name: {product.name}</p>
+    <Accordion defaultActiveKey="0">
+      {allProductState.map((product, index) => (
+        <Accordion.Item eventKey={String(index)} key={index}>
+          <Accordion.Header>{product.name} - ${product.cost}</Accordion.Header>
+          <Accordion.Body>
             <p>Country: {product.country}</p>
-            <p>Cost: {product.cost}</p>
             <p>In stock: {product.instock}</p>
-            {/* Render other product details as needed */}
-          </div>
-        ))}
-      </div>
-    </>
+          </Accordion.Body>
+        </Accordion.Item>
+      ))}
+    </Accordion>
   )
 }

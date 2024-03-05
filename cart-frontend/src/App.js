@@ -1,10 +1,11 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import ProductsHandler from './components/products-handler';
+import ProductList from './components/products-handler';
 
 function App() {
   return (
-    <ProductsHandler/>
+    <ProductList/>
   );
 }
 

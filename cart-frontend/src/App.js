@@ -1,8 +1,10 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import { Col, Container } from 'react-bootstrap';
+import { Col, Container, Row } from 'react-bootstrap';
 import ProductList from './components/products-handler';
+import Cart from './components/cart';
+import Checkout from './components/checkout';
 
 function App() {
   return (
@@ -11,9 +13,17 @@ function App() {
         <h1>Shopping Cart</h1>
       </Container>
       <Container>
-        <Col>
-          <ProductList/>
-        </Col>
+        <Row>
+          <Col>
+              <ProductList/>
+            </Col>
+            <Col>
+              <Cart/>
+            </Col>
+            <Col>
+              <Checkout/>
+            </Col>
+        </Row>
       </Container>
     </>
   );

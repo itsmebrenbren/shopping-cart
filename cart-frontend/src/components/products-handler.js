@@ -60,6 +60,7 @@ export default function ProductList() {
       newCart.push({ ...productToAdd, quantity: 1 });
     }
     setCartState(newCart);
+    console.log(cartState);
   
     const newStock = productToAdd.instock - 1;
     await updateProductStock(productToAdd.id, newStock); // Update database

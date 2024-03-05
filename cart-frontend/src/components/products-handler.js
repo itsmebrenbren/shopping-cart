@@ -44,7 +44,7 @@ export default function ProductList() {
     refetchOnWindowFocus: true,
   });
 
-  // Updates database with changes in a products stock
+  // Updates new endpoint with changes in a products stock
   const updateProductStock = async (id, newStock) => {
     try {
       await axios.put(`http://localhost:1337/api/products/${id}`, {
@@ -70,7 +70,7 @@ export default function ProductList() {
     console.log(cartState);
   
     const newStock = productToAdd.instock - 1;
-    await updateProductStock(productToAdd.id, newStock); // Update database once an item is added to the cart
+    await updateProductStock(productToAdd.id, newStock); // Update new endpoint once an item is added to the cart
 
     const updatedProducts = productState.map(product => 
       product.id === productToAdd.id ? { ...product, instock: newStock } : product
@@ -81,7 +81,7 @@ export default function ProductList() {
   // Here is my restock code
   const restockProduct = async (productId) => {
     const newStock = productState.find(product => product.id === productId).instock + 10;
-    await updateProductStock(productId, newStock); // Update database on restock
+    await updateProductStock(productId, newStock); // Update new endpoint on restock
 
     const updatedProducts = productState.map(product => 
       product.id === productId ? { ...product, instock: newStock } : product
